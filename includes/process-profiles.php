@@ -1,6 +1,4 @@
 <?php 
-
-	
 	if ( isset($_POST['importSubmit'] ) ) {
 		$newFile = $_FILES['importedFile']['tmp_name'];
 		$uploadDir = WP_PLUGIN_DIR . '/wpip/profiles/' . $_FILES['importedFile']['name'];
@@ -29,13 +27,15 @@
 	if ( ($written > 0) && !isset($_POST['downloadPlugins']) ) { ?>
 		<div class="updated">
 			<p><strong><?php print $profileName; ?></strong> saved.&nbsp;  
-			<a href="<?php echo plugins_url('download.php',dirname(__FILE__)); ?>?file=<?php print $profileName ?>">Download</a>
+			<a href="plugins.php?page=installation_profiles&download=<?php print $profileName ?>">Download</a>
 			</p>
 		</div>
 	<?php }
 	}
 	
-	function wpip_profile_select() { ?>
+	function wpip_profile_select() { 
+		// manages the ajax request to load profile files
+	?>	
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 					$('#profileFilename').change(function() {
@@ -55,3 +55,24 @@
 			});
 		</script>
 	<?php }
+	
+	
+	function wpip_download_profile() {
+		$file = trim($_GET['download']);
+		$file = WP_PLUGIN_DIR . '/wpip/profiles/' . $file;
+
+		if (file_exists($file)) {
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/octet-stream');
+			header('Content-Disposition: attachment; filename='.basename($file));
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Pragma: public');
+			header('Content-Length: ' . filesize($file));
+			ob_clean();
+			flush();
+			readfile($file);
+			exit;
+		}
+	}

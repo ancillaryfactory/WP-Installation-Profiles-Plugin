@@ -63,6 +63,9 @@ if ( isset($_POST['saveProfile']) || isset($_POST['downloadPlugins']) ) {
 	add_action('admin_head', 'wpip_save_profile' );
 }
 
+if ( isset($_GET['download']) ) {
+	add_action('admin_init', 'wpip_download_profile' );
+}
 
 function wpip_installation_profile_admin() { 
 
@@ -98,7 +101,7 @@ function wpip_installation_profile_admin() {
 		<br/><br/>
 		<strong>Or save this profile as:</strong><br/>
 			<input type="text" name="profileName" id="profileName" style="width:200px;" placeholder="Name"/>
-		</p><br/>
+		</p>
 		
 		<p><strong>Plugins</strong> <em>(names found in the <a href="http://wordpress.org/extend/plugins/" target="_blank">Wordpress Plugin Directory</a>)</em>:<br/>
 			<textarea name="pluginNames" id="pluginNames" rows="15" cols="46"><?php print $defaultLines; ?></textarea>
