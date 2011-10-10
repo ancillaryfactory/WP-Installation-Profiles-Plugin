@@ -67,6 +67,12 @@ if ( isset($_GET['download']) ) {
 	add_action('admin_init', 'wpip_download_profile' );
 }
 
+
+if ( isset($_POST['importSubmit'] ) ) {
+	add_action('admin_head', 'wpip_import_profile' );
+}
+
+
 function wpip_installation_profile_admin() { 
 
 	// read data from default profile
@@ -80,6 +86,16 @@ function wpip_installation_profile_admin() {
 <h2>Installation Profiles</h2>
 
 <!--<pre><?php print_r($_POST); ?></pre>-->
+
+<form method="post" action="admin.php?page=installation_profiles" enctype="multipart/form-data" id="importForm">
+	<p style="margin-top:0"><br/>
+		<strong>Upload: </strong>
+		<input type="file" name="importedFile" />
+		<input type="submit" name="importSubmit" value="Upload" />
+	</p>
+</form>
+
+
 
 <form method="post" action="admin.php?page=installation_profiles" id="profileForm">
 		<p>

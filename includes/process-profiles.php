@@ -76,3 +76,15 @@
 			exit;
 		}
 	}
+	
+	function wpip_import_profile() {
+		$newFile = $_FILES['importedFile']['tmp_name'];
+		$uploadDir = WP_PLUGIN_DIR . '/wpip/profiles/' . $_FILES['importedFile']['name'];
+		$moved = move_uploaded_file($newFile,$uploadDir);
+		
+		if ( $moved ) { ?>
+			<div class="update">
+				<p>Imported <?php print $_FILES['importedFile']['name']; ?>. </p>
+			</div>
+		<?php }	
+	}
