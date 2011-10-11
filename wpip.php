@@ -73,6 +73,11 @@ if ( isset($_POST['importSubmit'] ) ) {
 }
 
 
+if ( isset($_POST['downloadPlugins'] ) ) {
+	add_action('admin_head', 'wpip_fetch_plugins' );
+}
+
+
 function wpip_installation_profile_admin() { 
 
 	// read data from default profile
@@ -82,18 +87,24 @@ function wpip_installation_profile_admin() {
 ?>
 
 <div class="wrap"> 
-  <div id="icon-edit-pages" class="icon32" style="float:left"></div>
+ 
+
+ <div id="icon-edit-pages" class="icon32" style="float:left"></div>
 <h2>Installation Profiles</h2>
 
 <!--<pre><?php print_r($_POST); ?></pre>-->
 
+<div id="wpipFormWrapper" style="width:800px">
+
+<div id="uploadWrapper" style="">
 <form method="post" action="admin.php?page=installation_profiles" enctype="multipart/form-data" id="importForm">
 	<p style="margin-top:0"><br/>
-		<strong>Upload: </strong>
+		<strong>Import new profile: </strong><br/>
 		<input type="file" name="importedFile" />
 		<input type="submit" name="importSubmit" value="Upload" />
 	</p>
 </form>
+</div>
 
 
 
@@ -126,5 +137,6 @@ function wpip_installation_profile_admin() {
 		<input type="submit" name="downloadPlugins" value="Download plugins" style="padding:5px" id="downloadPlugins"/>
 	</form>
 
+	</div> <!-- end #wpipFormWrapper -->
 	
 <?php } ?>

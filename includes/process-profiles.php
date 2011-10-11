@@ -1,9 +1,5 @@
 <?php 
-	if ( isset($_POST['importSubmit'] ) ) {
-		$newFile = $_FILES['importedFile']['tmp_name'];
-		$uploadDir = WP_PLUGIN_DIR . '/wpip/profiles/' . $_FILES['importedFile']['name'];
-		$moved = move_uploaded_file($newFile,$uploadDir);
-	}
+	
 	
 	function wpip_save_profile() {
 	// checks for form submission
@@ -78,13 +74,85 @@
 	}
 	
 	function wpip_import_profile() {
+		
+		// add check for '.profile' in filename
 		$newFile = $_FILES['importedFile']['tmp_name'];
-		$uploadDir = WP_PLUGIN_DIR . '/wpip/profiles/' . $_FILES['importedFile']['name'];
+		$newFileName = $_FILES['importedFile']['name'];
+		$uploadDir = WP_PLUGIN_DIR . '/wpip/profiles/' . $newFileName;
 		$moved = move_uploaded_file($newFile,$uploadDir);
 		
 		if ( $moved ) { ?>
-			<div class="update">
-				<p>Imported <?php print $_FILES['importedFile']['name']; ?>. </p>
+			<div class="updated">
+				<p>Imported <strong><?php print $newFileName; ?></strong>. </p>
 			</div>
 		<?php }	
+	}
+	
+	
+	function wpip_fetch_plugins() {
+		$lines = $_POST['pluginNames'];
+		$linesArray = explode("\n", $lines);
+		
+		
+		if ( !empty($lines) && $_POST['downloadPlugins'] ) { ?>
+			<div class="updated">
+			<p><strong>Downloaded plugins:</strong> 
+				<?php print '<a style="float:right" href="' . admin_url('plugins.php') . '">Visit plugins page</a>'; ?>
+			</p>
+			<ul>
+			<?php 
+			foreach ($linesArray as $line) {
+				$apiFilename = str_replace(' ', '-', $line);
+				$apiURL = 'http://api.wordpress.org/plugins/info/1.0/' . $apiFilename . '.xml';
+				
+				
+				$plugin = simplexml_load_file($apiURL);
+
+				
+				// gets filename from Wordpress API
+					$pluginURL = $plugin->download_link;
+					$apiName = $plugin->name;
+					$apiVersion = $plugin->version;
+					$apiHomepage = $plugin->homepage;
+					
+					if ( !empty($pluginURL) ) {
+						$path_parts = pathinfo($pluginURL);
+						$filename = $path_parts['filename'] . '.' . $path_parts['extension'];
+						$path = $filename;
+					
+						$ch = curl_init($pluginURL);
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					 
+						$data = curl_exec($ch);
+					 
+						curl_close($ch);
+					 
+						$downloadTest = file_put_contents($path, $data);
+					
+
+						// extracts and deletes zip file
+						$zip = new ZipArchive;
+							
+						if ($zip->open($filename) === TRUE) {
+							$zip->extractTo(WP_PLUGIN_DIR);
+							$zip->close();
+							//echo 'ok';
+						} else {
+							//echo 'failed';
+						}
+					}
+					
+					if ( $downloadTest > 0 ) {
+						$delete = unlink($filename);
+						print '<li><a href="' . $apiHomepage . '" target="_blank">'. $apiName . '</a> ' . $apiVersion . '</li>';
+					} else {
+						print "<li>Couldn't find <strong>'" . $line . "'</strong></li>";
+					}  
+				
+				
+			} // end foreach  ?>
+			</ul>		
+			</div>
+		<?php } // end if isset 
+		
 	}
