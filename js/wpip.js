@@ -17,8 +17,10 @@ jQuery(document).ready(function($) {
 	});
 	
 	$('#downloadPlugins').click(function() {
-		$('#downloadPlugins').val('Downloading...');
-		$.modal('<div><p>Downloading from the Wordpress plugin directory<br/><br/><img src="89.gif" /></p></div>');
+		if ( $('#pluginNames').val().length !== 0 ) { 
+			$('#downloadPlugins').val('Downloading...');
+			$.modal('<div><p>Downloading from the Wordpress plugin directory<br/><br/><img src="89.gif" /></p></div>');
+			}
 	});
 	
  });

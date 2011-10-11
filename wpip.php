@@ -58,7 +58,6 @@ add_action('admin_init', 'wpip_installation_profile_admin_init' );
 add_action('admin_menu', 'wpip_installation_profile_admin_actions');
 
 
-
 if ( isset($_POST['saveProfile']) || isset($_POST['downloadPlugins']) ) {
 	add_action('admin_head', 'wpip_save_profile' );
 }
@@ -134,7 +133,7 @@ function wpip_installation_profile_admin() {
 			<textarea name="pluginNames" id="pluginNames" rows="15" cols="46"><?php print $defaultLines; ?></textarea>
 		</p>
 		<input type="submit" name="saveProfile" value="Save profile" style="padding:5px"/>&nbsp;&nbsp;
-		<input type="submit" name="downloadPlugins" value="Download plugins" style="padding:5px" id="downloadPlugins"/>
+		<input type="submit" name="downloadPlugins" value="Download plugins and save profile" style="padding:5px" id="downloadPlugins"/>
 	</form>
 
 	</div> <!-- end #wpipFormWrapper -->
