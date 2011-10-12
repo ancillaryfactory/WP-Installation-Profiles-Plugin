@@ -46,7 +46,7 @@
 						}
 					});
 
-					$('#profileToDownload').attr('href','download.php?file=' + filename ).attr('title',filename);
+					$('#profileToDownload').attr('href','plugins.php?page=installation_profiles&download=' + filename ).attr('title',filename).text('Download ' + filename);
 				}); // end .change
 			});
 		</script>
@@ -96,10 +96,8 @@
 		
 		if ( !empty($lines) && $_POST['downloadPlugins'] ) { ?>
 			<div class="updated">
-			<p><strong>Downloaded plugins:</strong> 
-				<?php print '<a style="float:right" href="' . admin_url('plugins.php') . '">Visit plugins page</a>'; ?>
-			</p>
-			<ul>
+			<p><strong>Downloaded plugins:</strong></p>
+			<ul id="pluginDownloadSuccess">
 			<?php 
 			foreach ($linesArray as $line) {
 				$apiFilename = str_replace(' ', '-', $line);
@@ -152,6 +150,9 @@
 				
 			} // end foreach  ?>
 			</ul>		
+			<p style="margin-top:20px;font-weight:bold">
+				<?php print '<a href="' . admin_url('plugins.php') . '">Visit plugins page</a>'; ?>
+			</p>
 			</div>
 		<?php } // end if isset 
 		
