@@ -103,8 +103,13 @@ function wpip_installation_profile_admin() {
 		<input type="submit" name="importSubmit" value="Upload" />
 	</p>
 </form>
-</div>
 
+	<div id="downloadWrapper">
+		<a class="button-secondary" id="profileToDownload" title="defautl.profile" href="plugins.php?page=installation_profiles&download=default.profile"><strong>Download current profile</strong></a>
+	</div>
+
+
+</div>
 
 
 <form method="post" action="admin.php?page=installation_profiles" id="profileForm">
@@ -132,10 +137,22 @@ function wpip_installation_profile_admin() {
 		<p><strong>Plugins</strong> <em>(names found in the <a href="http://wordpress.org/extend/plugins/" target="_blank">Wordpress Plugin Directory</a>)</em>:<br/>
 			<textarea name="pluginNames" id="pluginNames" rows="15" cols="46"><?php print $defaultLines; ?></textarea>
 		</p>
-		<input type="submit" name="saveProfile" value="Save profile" style="padding:5px"/>&nbsp;&nbsp;
-		<input type="submit" name="downloadPlugins" value="Download plugins and save profile" style="padding:5px" id="downloadPlugins"/>
+		<input class="button-secondary" type="submit" name="saveProfile" value="Save profile" style="padding:5px"/>&nbsp;&nbsp;
+		<input class="button-primary" type="submit" name="downloadPlugins" value="Download plugins and save profile" style="padding:5px" id="downloadPlugins"/>
 	</form>
-
+	
+	<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$('#downloadPlugins').click(function() {
+			if ( $('#pluginNames').val().length !== 0 ) { 
+				$('#downloadPlugins').val('Downloading...');
+				$.modal('<div><p>Downloading from the Wordpress plugin directory...</p></div>');
+			} // end if
+		});
+	});
+	</script>
+	
+	
 	</div> <!-- end #wpipFormWrapper -->
 	
 <?php } ?>

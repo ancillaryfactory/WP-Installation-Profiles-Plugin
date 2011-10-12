@@ -1,11 +1,5 @@
 jQuery(document).ready(function($) {
 	$('#profileFilename').val('default.profile');
-
-		
-	$('#importFormWrapper').hide();
-	$('#toggleImport').click(function() {
-		$('#importFormWrapper').slideToggle();
-	});
 	
 	
 	$('#profileForm').submit(function() {
@@ -16,11 +10,6 @@ jQuery(document).ready(function($) {
 		} 
 	});
 	
-	$('#downloadPlugins').click(function() {
-		if ( $('#pluginNames').val().length !== 0 ) { 
-			$('#downloadPlugins').val('Downloading...');
-			$.modal('<div><p>Downloading from the Wordpress plugin directory<br/><br/><img src="89.gif" /></p></div>');
-			}
-	});
+	
 	
  });
