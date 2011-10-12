@@ -18,5 +18,10 @@ jQuery(document).ready(function($) {
 		} 
 	});
 
+	$('#wpipHelp').hide();
+	$('#wpipToggleHelp').click(function() {
+		$('#wpipHelp').fadeToggle();
+	});
+		
 	
  });

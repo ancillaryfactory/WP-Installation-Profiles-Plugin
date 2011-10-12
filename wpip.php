@@ -91,6 +91,12 @@ function wpip_installation_profile_admin() {
  <div id="icon-tools" class="icon32" style="float:left"></div>
 <h2>Installation Profiles</h2>
 
+<h4><a href="#" id="wpipToggleHelp">How to add new plugins</a></h4>
+<div id="wpipHelp">
+	<p>Search the <a href="http://wordpress.org/extend/plugins/" target="_blank">Wordpress Plugin Directory</a> and copy the slug from the plugin's listing page. For example, use the following text for <em>WP Super Cache</em>:</p>
+	<img src="<?php print plugins_url('plugin-url.png',__FILE__) ?>"/><br/>
+	<p>Plugin names may be added with or without hyphens (e.g. <em>wp-super-cache</em> = <em>wp super cache</em>).</p>
+</div> <!-- end help-->
 <!--<pre><?php print_r($_POST); ?></pre>-->
 
 <div id="wpipFormWrapper" class="postbox">
@@ -140,8 +146,11 @@ function wpip_installation_profile_admin() {
 		<p><strong>Plugins</strong> <em>(names found in the <a href="http://wordpress.org/extend/plugins/" target="_blank">Wordpress Plugin Directory</a>)</em>:<br/>
 			<textarea name="pluginNames" id="pluginNames" rows="15" cols="46"><?php print $defaultLines; ?></textarea>
 		</p>
+		
+		<p style="margin-top: 20px;">
 		<input class="button-secondary" type="submit" name="saveProfile" value="Save profile" style="padding:5px"/>&nbsp;&nbsp;
 		<input class="button-primary" type="submit" name="downloadPlugins" value="Download plugins and save profile" style="padding:5px" id="downloadPlugins"/>
+		</p>
 	</form>
 	
 	
