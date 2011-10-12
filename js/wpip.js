@@ -10,6 +10,13 @@ jQuery(document).ready(function($) {
 		} 
 	});
 	
-	
+
+	$('#downloadPlugins').click(function() {
+		if ( $('#pluginNames').val().length !== 0 ) { 
+			$('#downloadPlugins').val('Downloading...');
+			$.modal('<div><p>Downloading from the Wordpress plugin directory...</p></div>');
+		} 
+	});
+
 	
  });

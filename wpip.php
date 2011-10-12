@@ -141,17 +141,6 @@ function wpip_installation_profile_admin() {
 		<input class="button-primary" type="submit" name="downloadPlugins" value="Download plugins and save profile" style="padding:5px" id="downloadPlugins"/>
 	</form>
 	
-	<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$('#downloadPlugins').click(function() {
-			if ( $('#pluginNames').val().length !== 0 ) { 
-				$('#downloadPlugins').val('Downloading...');
-				$.modal('<div><p>Downloading from the Wordpress plugin directory...</p></div>');
-			} // end if
-		});
-	});
-	</script>
-	
 	
 	</div> <!-- end #wpipFormWrapper -->
 	

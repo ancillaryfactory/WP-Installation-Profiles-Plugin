@@ -100,13 +100,12 @@
 			<ul id="pluginDownloadSuccess">
 			<?php 
 			foreach ($linesArray as $line) {
+				unset($downloadTest);
 				$apiFilename = str_replace(' ', '-', $line);
 				$apiURL = 'http://api.wordpress.org/plugins/info/1.0/' . $apiFilename . '.xml';
 				
-				
 				$plugin = simplexml_load_file($apiURL);
 
-				
 				// gets filename from Wordpress API
 					$pluginURL = $plugin->download_link;
 					$apiName = $plugin->name;
@@ -126,7 +125,6 @@
 						curl_close($ch);
 					 
 						$downloadTest = file_put_contents($path, $data);
-					
 
 						// extracts and deletes zip file
 						$zip = new ZipArchive;
