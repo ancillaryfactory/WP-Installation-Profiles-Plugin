@@ -3,7 +3,7 @@
 
 Plugin Name: Installation Profiles
 Plugin URI: 
-Description: Download collections of plugins
+Description: Download collections of plugins. Go to Plugins -> Installation Profiles
 Version: 0.3
 Author: Jon Schwab
 Author URI: http://www.ancillaryfactory.com
@@ -88,7 +88,7 @@ function wpip_installation_profile_admin() {
 <div class="wrap"> 
  
 
- <div id="icon-edit-pages" class="icon32" style="float:left"></div>
+ <div id="icon-tools" class="icon32" style="float:left"></div>
 <h2>Installation Profiles</h2>
 
 <!--<pre><?php print_r($_POST); ?></pre>-->
