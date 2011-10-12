@@ -93,9 +93,12 @@ function wpip_installation_profile_admin() {
 
 <!--<pre><?php print_r($_POST); ?></pre>-->
 
-<div id="wpipFormWrapper" style="width:800px">
+<div id="wpipFormWrapper" class="postbox">
 
-<div id="uploadWrapper" style="">
+
+
+<div id="uploadWrapper" >
+<h3 style="font-size:16px">Import / Export</h3>
 <form method="post" action="admin.php?page=installation_profiles" enctype="multipart/form-data" id="importForm">
 	<p style="margin-top:0"><br/>
 		<strong>Import new profile: </strong><br/>
@@ -115,7 +118,7 @@ function wpip_installation_profile_admin() {
 <form method="post" action="admin.php?page=installation_profiles" id="profileForm">
 		<p>
 		
-		<strong>Choose:</strong><br/>
+		<strong>Choose a profile:</strong><br/>
 		<select id="profileFilename" name="profileFilename">
 			<?php 
 			$dir = WP_PLUGIN_DIR . '/wpip/profiles';
