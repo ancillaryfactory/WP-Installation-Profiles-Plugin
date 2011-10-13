@@ -3,7 +3,7 @@
 
 Plugin Name: Installation Profiles
 Plugin URI: 
-Description: Download collections of plugins. Go to Plugins -> Installation Profiles
+Description: Download collections of plugins. Go to Plugins -> Bulk Install Plugins
 Version: 0.3
 Author: Jon Schwab
 Author URI: http://www.ancillaryfactory.com
@@ -36,7 +36,7 @@ require(WP_PLUGIN_DIR . '/wpip/includes/process-profiles.php');
 
 
 function wpip_installation_profile_admin_actions() {
-	$page = add_submenu_page( 'plugins.php', 'Installation Profiles', 'Bulk Install Plugins', 'install_plugins', 'installation_profiles', 'wpip_installation_profile_admin' );
+	$page = add_submenu_page( 'plugins.php', 'Installation Profiles', 'Bulk Install Profiles', 'install_plugins', 'installation_profiles', 'wpip_installation_profile_admin' );
 	
 	add_action( 'admin_print_styles-' . $page, 'wpip_admin_styles' );
 	add_action('admin_footer-'. $page, 'wpip_profile_select' );
@@ -138,7 +138,7 @@ function wpip_installation_profile_admin() {
 
 </div>
 
-
+<h3 style="font-size:16px;width:340px;margin-top:24px;margin-bottom:20px">Download Plugins</h3>
 <form method="post" action="admin.php?page=installation_profiles" id="profileForm">
 		<p>
 		
@@ -159,7 +159,7 @@ function wpip_installation_profile_admin() {
 			<input type="text" name="profileName" id="profileName" style="width:200px;" placeholder="Name"/>
 		</p>
 		
-		<p><strong>Plugins</strong> <em>(names found in the <a href="http://wordpress.org/extend/plugins/" target="_blank">Wordpress Plugin Directory</a>)</em>:<br/>
+		<p><strong>Plugins</strong> <em>(one per line)</em>:<br/>
 			<textarea name="pluginNames" id="pluginNames" rows="15" cols="46"><?php print $defaultLines; ?></textarea>
 		</p>
 		
