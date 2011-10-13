@@ -46,7 +46,7 @@
 						}
 					});
 
-					$('#profileToDownload').attr('href','plugins.php?page=installation_profiles&download=' + filename ).attr('title',filename).text('Download ' + filename);
+					//$('#profileToDownload').attr('href','plugins.php?page=installation_profiles&download=' + filename ).attr('title',filename).text('Download ' + filename);
 				}); // end .change
 			});
 		</script>

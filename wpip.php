@@ -36,7 +36,7 @@ require(WP_PLUGIN_DIR . '/wpip/includes/process-profiles.php');
 
 
 function wpip_installation_profile_admin_actions() {
-	$page = add_submenu_page( 'plugins.php', 'Installation Profiles', 'Installation Profiles', 'install_plugins', 'installation_profiles', 'wpip_installation_profile_admin' );
+	$page = add_submenu_page( 'plugins.php', 'Installation Profiles', 'Bulk Install Plugins', 'install_plugins', 'installation_profiles', 'wpip_installation_profile_admin' );
 	
 	add_action( 'admin_print_styles-' . $page, 'wpip_admin_styles' );
 	add_action('admin_footer-'. $page, 'wpip_profile_select' );
@@ -83,6 +83,10 @@ function wpip_installation_profile_admin() {
 	$readDefaults = fopen(WP_PLUGIN_DIR . '/wpip/profiles/default.profile',"r");
 	$defaultLines = fread($readDefaults, filesize(WP_PLUGIN_DIR . '/wpip/profiles/default.profile'));
 	fclose($readDefaults);
+	
+	$dir = WP_PLUGIN_DIR . '/wpip/profiles';
+	$profilesList = scandir($dir);
+	
 ?>
 
 <div class="wrap"> 
@@ -91,10 +95,10 @@ function wpip_installation_profile_admin() {
  <div id="icon-tools" class="icon32" style="float:left"></div>
 <h2>Installation Profiles</h2>
 
-<h4><a href="#" id="wpipToggleHelp">How to add new plugins</a></h4>
-<div id="wpipHelp">
+<div id="wpipHelp" >
+<h3>How to add new plugins:</h3>
 	<p>Search the <a href="http://wordpress.org/extend/plugins/" target="_blank">Wordpress Plugin Directory</a> and copy the slug from the plugin's listing page. For example, use the following text for <em>WP Super Cache</em>:</p>
-	<img src="<?php print plugins_url('plugin-url.png',__FILE__) ?>"/><br/>
+	<img src="<?php print plugins_url('plugin-url.png',__FILE__) ?>" style="border:solid 1px #d8d8d8"/><br/>
 	<p>Plugin names may be added with or without hyphens (e.g. <em>wp-super-cache</em> = <em>wp super cache</em>).</p>
 </div> <!-- end help-->
 <!--<pre><?php print_r($_POST); ?></pre>-->
@@ -114,7 +118,21 @@ function wpip_installation_profile_admin() {
 </form>
 
 	<div id="downloadWrapper">
-		<a class="button-secondary" id="profileToDownload" title="defautl.profile" href="plugins.php?page=installation_profiles&download=default.profile"><strong>Download current profile</strong></a>
+		<h4>Download profiles:</h4>
+		
+		<ul>
+		<?php foreach ($profilesList as $profileFile) { 
+			if ( preg_match( '(profile$)', $profileFile) ) { 
+				$nameLength = stripos($profileFile, '.');
+				$name = substr($profileFile,0,$nameLength);?>
+				<li>
+					<a href="plugins.php?page=installation_profiles&download=<?php print $profileFile; ?>">
+						<?php print $name;?>
+					</a>
+				</li>	
+			<?php }	
+		} ?>
+		
 	</div>
 
 
@@ -127,8 +145,6 @@ function wpip_installation_profile_admin() {
 		<strong>Choose a profile:</strong><br/>
 		<select id="profileFilename" name="profileFilename">
 			<?php 
-			$dir = WP_PLUGIN_DIR . '/wpip/profiles';
-			$profilesList = scandir($dir);
 			foreach ( $profilesList as $profileFile ) {
 				if ( preg_match( '(profile$)', $profileFile) ) {
 					$nameLength = stripos($profileFile, '.');
@@ -155,5 +171,5 @@ function wpip_installation_profile_admin() {
 	
 	
 	</div> <!-- end #wpipFormWrapper -->
-	
+
 <?php } ?>
