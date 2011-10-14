@@ -1,15 +1,15 @@
-=== Topic Manger ===
+=== WP Install Profiles ===
 
 Contributors: rockgod100
 Plugin Name: Installation Profiles
-Plugin URI: 
-Tags: wp, plugins
-Author URI: 
-Author: 
+Plugin URI: https://github.com/ancillaryfactory/WP-Installation-Profiles-Plugin
+Tags: wp, plugins, installation
+Author URI: http://www.ancillaryfactory.com
+Author: Jon Schwab
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 
-Version: 0.3
+Stable tag: 0.7
+Version: 0.7
 
 Download collections of plugins automatically from the Wordpress plugin directory.
 
@@ -17,18 +17,21 @@ Download collections of plugins automatically from the Wordpress plugin director
 
 1. Upload WPIP folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Go to Plugins -> Installation Profiles
+1. Go to Plugins -> Bulk Install Profiles
 
 
 == Description ==
 Save time setting up new sites by automatically downloading groups of plugins. Add new plugins by adding the slug from the plugin's url in the Wordpress plugin directory. For instance, the plugin "All In One SEO Pack" is listed here: http://wordpress.org/extend/plugins/all-in-one-seo-pack/. Add "All In One SEO Pack" to an installation profile by adding 'all-in-one-seo-pack' in the plugins field (one plugin per line).
 
 
+WP Install Profiles (WPIP) allows users to define groups of plugins, called profiles. Once a profile has been entered, WPIP calls to the Wordpress Plugin Directory, downloads the plugin files and unzips them to the installation's plugins folder. Additionally, WPIP saves the profile in a downloadable format, so that the user can upload it to his/her next site and download the same plugins with a single click. 
+
+
 == Screenshots ==
 
-
+1. Plugins -> Bulk Download Profiles
 
 == Changelog ==
-Version 0.3:
+Version 0.7:
 
 * First release
