@@ -57,6 +57,15 @@
 		$file = trim($_GET['download']);
 		$file = WP_PLUGIN_DIR . '/install-profiles/profiles/' . $file;
 
+		// check for request of the current site's profile
+		if ( isset($_GET['current']) ) {
+			$activePlugins = get_option('active_plugins');
+			
+			// for each plugin in array, get foldername and add to array
+			// create convert_site_name_to_filename()
+			// create file and write new array with plugin names
+		}
+		
 		if (file_exists($file)) {
 			header('Content-Description: File Transfer');
 			header('Content-Type: application/octet-stream');
