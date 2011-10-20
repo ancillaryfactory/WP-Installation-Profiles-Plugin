@@ -2,16 +2,16 @@
 /*
 
 Plugin Name: Installation Profiles
-Plugin URI: 
-Description: Download collections of plugins. Go to Plugins -> Bulk Install Plugins
-Version: 0.3
+Plugin URI: https://github.com/ancillaryfactory/WP-Installation-Profiles-Plugin
+Description: Download collections of plugins. Go to Plugins -> Bulk Install Profiles
+Version: 0.8
 Author: Jon Schwab
 Author URI: http://www.ancillaryfactory.com
 License: GPL2
 
 
 
-Copyright 2011    (email : jsschwab@aoa.org)
+Copyright 2011    (email : jon@ancillaryfactory.com)
 
     This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as 
@@ -32,7 +32,7 @@ Copyright 2011    (email : jsschwab@aoa.org)
 $plugin = plugin_basename(__FILE__); 
 
 
-require(WP_PLUGIN_DIR . '/wpip/includes/process-profiles.php');
+require(WP_PLUGIN_DIR . '/install-profiles/includes/process-profiles.php');
 
 
 function wpip_installation_profile_admin_actions() {
@@ -59,7 +59,7 @@ add_action('admin_menu', 'wpip_installation_profile_admin_actions');
 
 
 if ( isset($_POST['saveProfile']) || isset($_POST['downloadPlugins']) ) {
-	add_action('admin_head', 'wpip_save_profile' );
+	add_action('admin_notices', 'wpip_save_profile' );
 }
 
 if ( isset($_GET['download']) ) {
@@ -68,23 +68,23 @@ if ( isset($_GET['download']) ) {
 
 
 if ( isset($_POST['importSubmit'] ) ) {
-	add_action('admin_head', 'wpip_import_profile' );
+	add_action('admin_notices', 'wpip_import_profile' );
 }
 
 
 if ( isset($_POST['downloadPlugins'] ) ) {
-	add_action('admin_head', 'wpip_fetch_plugins' );
+	add_action('admin_notices', 'wpip_fetch_plugins' );
 }
 
 
 function wpip_installation_profile_admin() { 
 
 	// read data from default profile
-	$readDefaults = fopen(WP_PLUGIN_DIR . '/wpip/profiles/default.profile',"r");
-	$defaultLines = fread($readDefaults, filesize(WP_PLUGIN_DIR . '/wpip/profiles/default.profile'));
+	$readDefaults = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/default.profile',"r");
+	$defaultLines = fread($readDefaults, filesize(WP_PLUGIN_DIR . '/install-profiles/profiles/default.profile'));
 	fclose($readDefaults);
 	
-	$dir = WP_PLUGIN_DIR . '/wpip/profiles';
+	$dir = WP_PLUGIN_DIR . '/install-profiles/profiles';
 	$profilesList = scandir($dir);
 	
 ?>
@@ -108,7 +108,7 @@ function wpip_installation_profile_admin() {
 
 
 <div id="uploadWrapper" >
-<h3 style="font-size:16px">Import / Export</h3>
+<h3 style="font-size:16px; padding: 0 5px 5px;">Import / Export</h3>
 <form method="post" action="admin.php?page=installation_profiles" enctype="multipart/form-data" id="importForm">
 	<p style="margin-top:0"><br/>
 		<strong>Import new profile: </strong><br/>
@@ -138,7 +138,7 @@ function wpip_installation_profile_admin() {
 
 </div>
 
-<h3 style="font-size:16px;width:340px;margin-top:24px;margin-bottom:20px">Download Plugins</h3>
+<h3 style="font-size:16px;width:340px;margin-top:24px;margin-bottom:20px;padding: 0 5px 5px;">Download Plugins</h3>
 <form method="post" action="admin.php?page=installation_profiles" id="profileForm">
 		<p>
 		

@@ -15,7 +15,7 @@
 		
 		$profileName = str_replace(' ', '-', $profileName);
 		
-		$newProfile = fopen(WP_PLUGIN_DIR . '/wpip/profiles/' . $profileName,"w"); 
+		$newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,"w"); 
 		$written =  fwrite($newProfile, $lines);
 
 		fclose($newProfile);
@@ -55,7 +55,7 @@
 	
 	function wpip_download_profile() {
 		$file = trim($_GET['download']);
-		$file = WP_PLUGIN_DIR . '/wpip/profiles/' . $file;
+		$file = WP_PLUGIN_DIR . '/install-profiles/profiles/' . $file;
 
 		if (file_exists($file)) {
 			header('Content-Description: File Transfer');
@@ -78,7 +78,7 @@
 		// add check for '.profile' in filename
 		$newFile = $_FILES['importedFile']['tmp_name'];
 		$newFileName = $_FILES['importedFile']['name'];
-		$uploadDir = WP_PLUGIN_DIR . '/wpip/profiles/' . $newFileName;
+		$uploadDir = WP_PLUGIN_DIR . '/install-profiles/profiles/' . $newFileName;
 		$moved = move_uploaded_file($newFile,$uploadDir);
 		
 		if ( $moved ) { ?>
@@ -149,7 +149,7 @@
 			} // end foreach  ?>
 			</ul>		
 			<p style="margin-top:20px;font-weight:bold">
-				<?php print '<a href="' . admin_url('plugins.php') . '">Visit plugins page</a>'; ?>
+				<?php print '<a href="' . admin_url('plugins.php?plugin_status=inactive') . '">Visit plugins page</a>'; ?>
 			</p>
 			</div>
 		<?php } // end if isset 
