@@ -59,7 +59,7 @@
 
 		// check for request of the current site's profile
 		if ( isset($_GET['current']) ) {
-			
+				
 			// build filename for current site profile
 			$siteName = str_replace(' ', '-', get_bloginfo( 'name' ));
 			$currentSiteProfileFilename = $siteName . '.profile';
@@ -122,7 +122,11 @@
 			<?php 
 			foreach ($linesArray as $line) {
 				unset($downloadTest);
-				$apiFilename = str_replace(' ', '-', $line);
+				$apiFilename = trim(str_replace(' ', '-', $line));
+				
+				if ( empty($apiFilename)  ) {
+					continue;
+				}
 				$apiURL = 'http://api.wordpress.org/plugins/info/1.0/' . $apiFilename . '.xml';
 				
 				$plugin = simplexml_load_file($apiURL);
@@ -165,8 +169,7 @@
 					} else {
 						print "<li>Couldn't find <strong>'" . $line . "'</strong></li>";
 					}  
-				
-				
+
 			} // end foreach  ?>
 			</ul>		
 			<p style="margin-top:20px;font-weight:bold">
