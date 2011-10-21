@@ -138,7 +138,8 @@ function wpip_installation_profile_admin() {
 		$currentSiteProfile = $siteName . '.profile';
 		$activePlugins = get_option('active_plugins');
 	?>
-	<p style="margin-top:20px"><a style="padding:5px" href="plugins.php?page=installation_profiles&download=<?php print $currentSiteProfile; ?>&current" class="button">Download the profile of this site (<?php print count($activePlugins);?> plugins)</a></p>
+	
+	<p style="margin-top:30px"><a style="padding:5px" href="plugins.php?page=installation_profiles&download=<?php print $currentSiteProfile; ?>&current" class="button">Download the profile of this site (<?php print count($activePlugins);?> plugins)</a></p>
 	
 	</div>
 

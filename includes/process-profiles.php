@@ -59,11 +59,23 @@
 
 		// check for request of the current site's profile
 		if ( isset($_GET['current']) ) {
+			
+			// build filename for current site profile
+			$siteName = str_replace(' ', '-', get_bloginfo( 'name' ));
+			$currentSiteProfileFilename = $siteName . '.profile';
+			
 			$activePlugins = get_option('active_plugins');
 			
-			// for each plugin in array, get foldername and add to array
-			// create convert_site_name_to_filename()
-			// create file and write new array with plugin names
+			foreach ( $activePlugins as $pluginPath ) {
+				$pluginName = dirname($pluginPath);
+				$currentSiteProfile .= $pluginName . '\n';
+			}
+			
+			$newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $currentSiteProfileFilename,"w"); 
+			$written =  fwrite($newProfile, $currentSiteProfile);
+
+			fclose($newProfile);
+	
 		}
 		
 		if (file_exists($file)) {
