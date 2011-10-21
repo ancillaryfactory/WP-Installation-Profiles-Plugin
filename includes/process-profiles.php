@@ -68,7 +68,7 @@
 			
 			foreach ( $activePlugins as $pluginPath ) {
 				$pluginName = dirname($pluginPath);
-				$currentSiteProfile .= $pluginName . '\n';
+				$currentSiteProfile .= $pluginName . PHP_EOL;
 			}
 			
 			$newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $currentSiteProfileFilename,"w"); 
