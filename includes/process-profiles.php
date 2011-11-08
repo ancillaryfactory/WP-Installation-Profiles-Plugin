@@ -45,8 +45,7 @@
 							$('#pluginNames').val(text);
 						}
 					});
-
-					//$('#profileToDownload').attr('href','plugins.php?page=installation_profiles&download=' + filename ).attr('title',filename).text('Download ' + filename);
+					
 				}); // end .change
 			});
 		</script>
@@ -68,6 +67,9 @@
 			
 			foreach ( $activePlugins as $pluginPath ) {
 				$pluginName = dirname($pluginPath);
+				if ( $pluginName == '.' ) { // ignore plugins that aren't in a folder
+					continue;
+				}
 				$currentSiteProfile .= $pluginName . PHP_EOL;
 			}
 			
@@ -124,7 +126,7 @@
 				unset($downloadTest);
 				$apiFilename = trim(str_replace(' ', '-', $line));
 				
-				if ( empty($apiFilename)  ) {
+				if ( empty($apiFilename) || $apiFilename == 'install-profiles' ) {
 					continue;
 				}
 				$apiURL = 'http://api.wordpress.org/plugins/info/1.0/' . $apiFilename . '.xml';

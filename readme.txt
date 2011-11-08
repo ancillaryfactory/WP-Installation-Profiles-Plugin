@@ -8,8 +8,8 @@ Author URI: http://www.ancillaryfactory.com
 Author: Jon Schwab
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 0.8
-Version: 0.8
+Stable tag: 1.0
+Version: 1.0
 
 Download collections of plugins automatically from the Wordpress plugin directory.
 
@@ -26,12 +26,19 @@ Save time setting up new sites by automatically downloading groups of plugins. A
 
 WP Install Profiles (WPIP) allows users to define groups of plugins, called profiles. Once a profile has been entered, WPIP calls to the Wordpress Plugin Directory, downloads the plugin files and unzips them to the installation's plugins folder. Additionally, WPIP saves the profile in a downloadable format, so that the user can upload it to his/her next site and download the same plugins with a single click. 
 
+See Install Profiles in action: [http://www.youtube.com/watch?v=W-mBhPA1XGA](http://www.youtube.com/watch?v=W-mBhPA1XGA)
 
 == Screenshots ==
 
 1. Plugins -> Bulk Download Profiles
 
 == Changelog ==
-Version 0.7:
+= 1.0 =
+
+* Added feature to download the profile of the current site, to easily set up a new site based on an existing site's profile
+
+* Better handling of plugin names
+
+= 0.7 =
 
 * First release

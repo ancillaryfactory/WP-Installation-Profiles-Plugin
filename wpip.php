@@ -4,7 +4,7 @@
 Plugin Name: Installation Profiles
 Plugin URI: https://github.com/ancillaryfactory/WP-Installation-Profiles-Plugin
 Description: Download collections of plugins. Go to Plugins -> Bulk Install Profiles
-Version: 0.8
+Version: 1.0
 Author: Jon Schwab
 Author URI: http://www.ancillaryfactory.com
 License: GPL2

@@ -6,5 +6,4 @@ contact form 7
 wp super cache
 backwpup
 google analyticator
-portable phpmyadmin
 use google libraries
