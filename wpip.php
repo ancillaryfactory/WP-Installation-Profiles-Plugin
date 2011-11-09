@@ -76,6 +76,10 @@ if ( isset($_POST['downloadPlugins'] ) ) {
 	add_action('admin_notices', 'wpip_fetch_plugins' );
 }
 
+if ( isset($_POST['apiSubmit'] ) ) {
+	add_action('admin_init', 'wpip_import_from_wpip_api' );
+}
+
 
 function wpip_installation_profile_admin() { 
 
@@ -118,6 +122,13 @@ function wpip_installation_profile_admin() {
 </form>
 
 	<div id="downloadWrapper">
+		<form method="post" action="admin.php?page=installation_profiles" id="wpipApiImport">
+			<strong>Enter your WPIP username:</strong><br/>
+			<input type="text" name="apiUserName" id="apiUserName" />
+			<input type="submit" name="apiSubmit" value="Import my profiles" />
+		</form>
+	
+		
 		<h4>Download profiles:</h4>
 		
 		<ul>

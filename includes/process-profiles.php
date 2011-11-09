@@ -45,8 +45,7 @@
 							$('#pluginNames').val(text);
 						}
 					});
-
-					//$('#profileToDownload').attr('href','plugins.php?page=installation_profiles&download=' + filename ).attr('title',filename).text('Download ' + filename);
+					
 				}); // end .change
 			});
 		</script>
@@ -57,6 +56,30 @@
 		$file = trim($_GET['download']);
 		$file = WP_PLUGIN_DIR . '/install-profiles/profiles/' . $file;
 
+		// check for request of the current site's profile
+		if ( isset($_GET['current']) ) {
+				
+			// build filename for current site profile
+			$siteName = str_replace(' ', '-', get_bloginfo( 'name' ));
+			$currentSiteProfileFilename = $siteName . '.profile';
+			
+			$activePlugins = get_option('active_plugins');
+			
+			foreach ( $activePlugins as $pluginPath ) {
+				$pluginName = dirname($pluginPath);
+				if ( $pluginName == '.' ) { // ignore plugins that aren't in a folder
+					continue;
+				}
+				$currentSiteProfile .= $pluginName . PHP_EOL;
+			}
+			
+			$newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $currentSiteProfileFilename,"w"); 
+			$written =  fwrite($newProfile, $currentSiteProfile);
+
+			fclose($newProfile);
+	
+		}
+		
 		if (file_exists($file)) {
 			header('Content-Description: File Transfer');
 			header('Content-Type: application/octet-stream');
@@ -101,7 +124,11 @@
 			<?php 
 			foreach ($linesArray as $line) {
 				unset($downloadTest);
-				$apiFilename = str_replace(' ', '-', $line);
+				$apiFilename = trim(str_replace(' ', '-', $line));
+				
+				if ( empty($apiFilename) || $apiFilename == 'install-profiles' ) {
+					continue;
+				}
 				$apiURL = 'http://api.wordpress.org/plugins/info/1.0/' . $apiFilename . '.xml';
 				
 				$plugin = simplexml_load_file($apiURL);
@@ -144,8 +171,7 @@
 					} else {
 						print "<li>Couldn't find <strong>'" . $line . "'</strong></li>";
 					}  
-				
-				
+
 			} // end foreach  ?>
 			</ul>		
 			<p style="margin-top:20px;font-weight:bold">
@@ -154,4 +180,33 @@
 			</div>
 		<?php } // end if isset 
 		
+	}
+	
+	/////////////////////////////////////////////////////
+	
+	function wpip_import_from_wpip_api() {
+		$apiUserName = mysql_real_escape_string($_POST['apiUserName']);
+		
+		$wpipApiURL = 'http://plugins.ancillaryfactory.com/api/user/'.$apiUserName;
+		$apiProfileData = simplexml_load_file($wpipApiURL);
+		
+		$profileCount = count($apiProfileData->profile);
+		
+		$i = 0;
+		while ( $i < $profileCount ) { 
+			unset($importedProfilePlugins);
+			
+			$importedProfileName = $apiProfileData->profile[$i]->name;
+			$importedFileName = $importedProfileName . '.profile';
+		
+			$plugins =  $apiProfileData->profile[$i]->plugins->plugin; 
+			foreach ( $plugins as $plugin ) { 
+				if ( !empty($plugin) ) {
+					$importedProfilePlugins .= trim($plugin) . PHP_EOL;
+				} 
+			} // end foreach
+		
+			file_put_contents(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $importedFileName,$importedProfilePlugins);	
+			$i++;
+		}  // end while 
 	}
