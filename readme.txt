@@ -2,14 +2,14 @@
 
 Contributors: rockgod100
 Plugin Name: Installation Profiles
-Plugin URI: https://github.com/ancillaryfactory/WP-Installation-Profiles-Plugin
+Plugin URI: http://plugins.ancillaryfactory.com
 Tags: wp, plugins, installation
 Author URI: http://www.ancillaryfactory.com
 Author: Jon Schwab
 Requires at least: 3.0
-Tested up to: 3.2
-Stable tag: 0.8
-Version: 0.8
+Tested up to: 3.3
+Stable tag: 2.0
+Version: 2.0
 
 Download collections of plugins automatically from the Wordpress plugin directory.
 
@@ -23,15 +23,30 @@ Download collections of plugins automatically from the Wordpress plugin director
 == Description ==
 Save time setting up new sites by automatically downloading groups of plugins. Add new plugins by adding the slug from the plugin's url in the Wordpress plugin directory. For instance, the plugin "All In One SEO Pack" is listed here: http://wordpress.org/extend/plugins/all-in-one-seo-pack/. Add "All In One SEO Pack" to an installation profile by adding 'all-in-one-seo-pack' in the plugins field (one plugin per line).
 
-
 WP Install Profiles (WPIP) allows users to define groups of plugins, called profiles. Once a profile has been entered, WPIP calls to the Wordpress Plugin Directory, downloads the plugin files and unzips them to the installation's plugins folder. Additionally, WPIP saves the profile in a downloadable format, so that the user can upload it to his/her next site and download the same plugins with a single click. 
 
+NEW - Store your profiles online and import them easily into all of your WordPress installs. [http://plugins.ancillaryfactory.com](Learn more and create and account)
+
+See Install Profiles in action: [http://www.youtube.com/watch?v=W-mBhPA1XGA](http://www.youtube.com/watch?v=W-mBhPA1XGA)
 
 == Screenshots ==
 
 1. Plugins -> Bulk Download Profiles
+2. Create and save your install profiles online - [http://plugins.ancillaryfactory.com](http://plugins.ancillaryfactory.com)
+3. Import online profiles with your WPIP username
 
 == Changelog ==
-Version 0.7:
+= 2.0 =
+
+* Save profiles online
+* Minor security improvements
+
+= 1.0 =
+
+* Added feature to download the profile of the current site, to easily set up a new site based on an existing site's profile
+
+* Better handling of plugin names
+
+= 0.7 =
 
 * First release

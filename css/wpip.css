@@ -1,10 +1,10 @@
 #downloadSuccessList {background:#A6F29F;margin-bottom: 30px;}
 
-#wpipFormWrapper {margin-top: 30px;padding: 10px 50px 40px;width: 800px;}
+#wpipFormWrapper {margin-top: 30px;padding: 10px 50px 0px;width: 800px;}
 
 #pluginNames, #profileName {border:1px solid #999;padding:5px}
 
-#uploadWrapper {border-left: 1px solid #D7D7D7;float: right;height: 400px;padding:20px 66px;}
+#uploadWrapper {border-left: 1px solid #D7D7D7;float: right;min-height: 600px;padding:20px 66px;}
 #downloadWrapper {padding-top:30px;border-top:solid 1px #999;margin-top:15px}
 
 #importFormWrapper {margin-bottom:40px;overflow:hidden}

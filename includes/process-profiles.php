@@ -208,5 +208,15 @@
 		
 			file_put_contents(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $importedFileName,$importedProfilePlugins);	
 			$i++;
-		}  // end while 
-	}
+		}  // end while ?>
+		
+		<div class="updated">
+			<p>Imported <?php print $profileCount; ?>
+				<?php if ( $profileCount == 1 ) {
+					echo ' profile ';
+				} else {
+					echo ' profiles ';
+				} ?>
+			from <?php print $apiUserName;?>.</p>
+		</div>
+	<?php } ?>
