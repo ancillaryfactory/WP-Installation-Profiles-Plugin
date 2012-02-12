@@ -1,6 +1,6 @@
 #downloadSuccessList {background:#A6F29F;margin-bottom: 30px;}
 
-#wpipFormWrapper {margin-top: 30px;padding: 10px 50px 0px;width: 800px;}
+#wpipFormWrapper {margin-top: 30px;padding: 10px 50px 0px;width:745px;}
 
 #pluginNames, #profileName {border:1px solid #999;padding:5px}
 
@@ -16,6 +16,14 @@
 
 #profileToDownload {padding:10px;font-weight:bold;}
 
-#wpipHelp {box-shadow: 1px 1px 10px #D8D8D8;margin-top: 20px;padding: 5px 0 5px 20px;width: 880px;}
+#wpipHelp {box-shadow: 1px 1px 10px #D8D8D8;margin-top: 20px;padding: 5px 0 5px 20px;}
 
 #wpipApiImport {margin-bottom:20px;border-bottom: 1px solid #999999;padding-bottom:20px}
+
+#pluginCheckboxForm {background:#dcdcdc;padding:40px;width:600px;height:450px;border-radius:10px;}
+#checkboxContainer {overflow-y:scroll;height:300px;margin-bottom:30px;}
+
+.modalHeadline {color:#666;font-size: 14px;padding-bottom:6px;}
+input.largeInput {padding:10px;font-size:14px;width:300px;}
+.pluginCheckbox {padding: 8px 4px;}
+
