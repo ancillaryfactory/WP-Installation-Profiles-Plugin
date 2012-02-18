@@ -227,9 +227,14 @@ function wpip_choose_plugins_to_save() { ?>
 	
 	<div style="margin-bottom:30px">
 		<label class="modalHeadline">Save profile as: </label>
-		<input class="largeInput" type="text" name="profileName" value="<?php echo get_bloginfo( 'name' );?> "/> 
+		<input class="largeInput" type="text" name="profileName" value="<?php echo str_replace(' ', '-', get_bloginfo( 'name' ));?> "/> 
 	</div>
-	<p><strong>Include the following plugins:</strong></p>
+	<p><strong>Include the following plugins:</strong>
+		<span style="margin-left: 150px"><a class="button" id="wpip_check_all" href="#">Check all</a>&nbsp;&nbsp;<a class="button" href="#" id="wpip_clear_all">Uncheck all</a></span>
+	</p>
+	
+	
+	
 	<div id="checkboxContainer">
 	
 		<?php 
@@ -244,6 +249,8 @@ function wpip_choose_plugins_to_save() { ?>
 	 		// use the folder name as the slug
 	 		$arr = explode("/", $slugPath, 2);
 	  		$slug = $arr[0]; 
+			
+			if ($slug == 'install-profiles'){continue;}
 			
 			// skip over plugins that aren't in folders
 			$pos = strpos($slug, '.php');
@@ -265,12 +272,45 @@ function wpip_choose_plugins_to_save() { ?>
 	
 		</div> <!-- end #checkboxContainer-->
 
-	<input type="submit" class="button-primary" value="Save amd Download" style="float:right"/>
+	<input name="customProfileSubmit" type="submit" class="button-primary" value="Save and Download" style="float:right"/>
 	</form>
 <?php }
 
-/* 
- * add jQuery to show form in modal
- * add function to process checkbox form
- * 
-*/
+
+function wpip_build_custom_profile() {
+	$profileName = trim($_POST['profileName']);	
+	$profileName = str_replace(' ', '-', $profileName) . '.profile';
+	$file = WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName;
+	
+	$fileContents = '';
+	
+	$currentSlugs = $_POST['currentSlugs'];
+	
+	// assemble the file contents from the $_POST checkbox array
+	foreach ($currentSlugs as $slug) {	
+		$fileContents .= $slug . PHP_EOL;
+	}
+	
+	$newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,"w"); 
+	$written =  fwrite($newProfile, $fileContents);
+
+	fclose($newProfile);
+	
+	// send the file download to the browser
+	if (file_exists($file)) {
+			header('Content-Description: File Transfer');
+			header('Content-Type: application/octet-stream');
+			header('Content-Disposition: attachment; filename='.basename($file));
+			header('Content-Transfer-Encoding: binary');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Pragma: public');
+			header('Content-Length: ' . filesize($file));
+			ob_clean();
+			flush();
+			readfile($file);
+			exit;
+		}
+	
+}
+

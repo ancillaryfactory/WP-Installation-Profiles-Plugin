@@ -39,8 +39,13 @@ function wpip_installation_profile_admin_actions() {
 	if (current_user_can('activate_plugins')) {
 		$page = add_submenu_page( 'plugins.php', 'Installation Profiles', 'Bulk Install Profiles', 'install_plugins', 'installation_profiles', 'wpip_installation_profile_admin' );
 		
+		$text = '<h3>How to add new plugins:</h3>
+	<p>Search the <a href="http://wordpress.org/extend/plugins/" target="_blank">WordPress Plugin Directory</a> and copy the slug from the plugin&apos;s listing page. For example, use the following text for <em>WP Super Cache</em>:</p><img src="'. plugins_url('plugin-url.png',__FILE__) . '" style="border:solid 1px #d8d8d8"/><br/>
+	<p>Plugin names may be added with or without hyphens (e.g. <em>wp-super-cache</em> = <em>wp super cache</em>).</p>';
+		
 		add_action( 'admin_print_styles-' . $page, 'wpip_admin_styles' );
 		add_action('admin_footer-'. $page, 'wpip_profile_select' );
+		add_contextual_help( $page, $text );
 	}
 }
 
@@ -49,11 +54,13 @@ function wpip_installation_profile_admin_init() {
        wp_register_style( 'wpipStylesheet', plugins_url('css/wpip.css', __FILE__) );
 	   wp_register_script( 'wpipScripts', plugins_url('js/wpip.js', __FILE__),'jquery',false,true );
 	   wp_register_script( 'wpipModal', plugins_url('js/jquery.simplemodal.1.4.1.min.js', __FILE__),'jquery',false,true );
+	   wp_register_script( 'wpipTabs', plugins_url('js/tabs.js', __FILE__),'jquery',false,true );
    }
 
 function wpip_admin_styles() {
        wp_enqueue_style( 'wpipStylesheet' );
 	   wp_enqueue_script( 'wpipScripts' );
+	   wp_enqueue_script( 'wpipModal' );
 	   wp_enqueue_script( 'wpipModal' );
    }
 
@@ -68,6 +75,11 @@ if ( isset($_POST['saveProfile']) || isset($_POST['downloadPlugins']) ) {
 // download one of the existing profiles
 if ( isset($_GET['download']) ) {
 	add_action('admin_init', 'wpip_download_profile' );
+}
+
+// download custom profile
+if ( isset($_POST['customProfileSubmit'] ) ) {
+	add_action('admin_init', 'wpip_build_custom_profile' );
 }
 
 
@@ -103,12 +115,9 @@ function wpip_installation_profile_admin() {
  <div id="icon-tools" class="icon32" style="float:left"></div>
 <h2>Installation Profiles</h2>
 
-<div id="wpipHelp" >
-<h3>How to add new plugins:</h3>
-	<p>Search the <a href="http://wordpress.org/extend/plugins/" target="_blank">WordPress Plugin Directory</a> and copy the slug from the plugin's listing page. For example, use the following text for <em>WP Super Cache</em>:</p>
-	<img src="<?php print plugins_url('plugin-url.png',__FILE__) ?>" style="border:solid 1px #d8d8d8"/><br/>
-	<p>Plugin names may be added with or without hyphens (e.g. <em>wp-super-cache</em> = <em>wp super cache</em>).</p>
-</div> <!-- end help-->
+<!--<div id="wpipHelp" >
+
+</div>  end help-->
 <!--<pre><?php print_r($_POST); ?></pre>-->
 
 <div id="wpipFormWrapper" class="postbox">
@@ -116,7 +125,7 @@ function wpip_installation_profile_admin() {
 
 
 <div id="uploadWrapper" >
-<h3 style="font-size:16px; padding: 0 5px 5px;">Import / Export</h3>
+<h3 style="font-size:16px; padding: 3px 5px 5px;">Import / Export</h3>
 <form method="post" action="admin.php?page=installation_profiles" enctype="multipart/form-data" id="importForm">
 	<p style="margin-top:0"><br/>
 		<strong>Import new profile: </strong><br/>
@@ -155,7 +164,7 @@ function wpip_installation_profile_admin() {
 		$activePlugins = get_option('active_plugins');
 	?>
 	
-	<p style="margin-top:30px"><a id="choosePluginsButton" style="padding:5px" href="plugins.php?page=installation_profiles&download=<?php print $currentSiteProfile; ?>&current" class="button">Download the profile of this site (<?php print count($activePlugins);?> plugins)</a></p>
+	<p style="margin-top:30px"><a id="choosePluginsButton" style="padding:5px" href="plugins.php?page=installation_profiles&download=<?php print $currentSiteProfile; ?>&current" class="button">Create a custom profile from this site (<?php print count(get_plugins());?> plugins)</a></p>
 		
 		<?php wpip_choose_plugins_to_save(); ?>
 		
@@ -164,7 +173,7 @@ function wpip_installation_profile_admin() {
 
 </div>
 
-<h3 style="font-size:16px;width:340px;margin-top:24px;margin-bottom:20px;padding: 0 5px 5px;">Download Plugins</h3>
+<h3 style="font-size:16px;margin-top:24px;margin-bottom:20px;padding: 0 5px 5px;">Download Plugins</h3>
 <form method="post" action="admin.php?page=installation_profiles" id="profileForm">
 		<p>
 		
@@ -185,7 +194,7 @@ function wpip_installation_profile_admin() {
 			<input type="text" name="profileName" id="profileName" style="width:200px;" placeholder="Name"/>
 		</p>
 		
-		<p><strong>Plugins</strong> <em>(one per line)</em>:<br/>
+		<p><strong>Plugins</strong> <em>(one per line)</em>: <span><a style="font-size:10px;position:relative;top:-2px;margin-left:45px" href="#" id="helpTrigger">How to add plugins</a></span><br/>
 			<textarea name="pluginNames" id="pluginNames" rows="15" cols="46"><?php print $defaultLines; ?></textarea>
 		</p>
 		
@@ -194,7 +203,7 @@ function wpip_installation_profile_admin() {
 		<input class="button-primary" type="submit" name="downloadPlugins" value="Download plugins and save profile" style="padding:5px" id="downloadPlugins"/>
 		</p>
 	</form>
-	
+		
 	<div style="clear: both"></div>
 	</div> <!-- end #wpipFormWrapper -->
 

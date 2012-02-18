@@ -29,7 +29,11 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 	
+	// stripe profile builder table
 	$('#checkboxContainer > .pluginCheckbox').filter(':odd').css('background-color','#c7c7c7');
 	
+	$('#helpTrigger').click(function() {
+		$('#contextual-help-link').click();
+	});
 	
  });
