@@ -3,15 +3,15 @@
 Contributors: rockgod100
 Plugin Name: Installation Profiles
 Plugin URI: http://plugins.ancillaryfactory.com
-Tags: wp, plugins, installation
+Tags: wp, plugins, installation, admin, administration
 Author URI: http://www.ancillaryfactory.com
 Author: Jon Schwab
-Requires at least: 3.0
+Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 2.0
-Version: 2.0
+Stable tag: 2.5.1
+Version: 2.5.1
 
-Download collections of plugins automatically from the Wordpress plugin directory.
+Download custom collections of plugins automatically from the WordPress plugin directory.
 
 == Installation ==
 
@@ -21,11 +21,11 @@ Download collections of plugins automatically from the Wordpress plugin director
 
 
 == Description ==
-Save time setting up new sites by automatically downloading groups of plugins. Add new plugins by adding the slug from the plugin's url in the Wordpress plugin directory. For instance, the plugin "All In One SEO Pack" is listed here: http://wordpress.org/extend/plugins/all-in-one-seo-pack/. Add "All In One SEO Pack" to an installation profile by adding 'all-in-one-seo-pack' in the plugins field (one plugin per line).
+Save time setting up new sites by automatically downloading groups of plugins. Add new plugins by adding the slug from the plugin's url in the WordPress plugin directory. For instance, the plugin "All In One SEO Pack" is listed here: http://wordpress.org/extend/plugins/all-in-one-seo-pack/. Add "All In One SEO Pack" to an installation profile by adding 'all-in-one-seo-pack' in the plugins field (one plugin per line).
 
-WP Install Profiles (WPIP) allows users to define groups of plugins, called profiles. Once a profile has been entered, WPIP calls to the Wordpress Plugin Directory, downloads the plugin files and unzips them to the installation's plugins folder. Additionally, WPIP saves the profile in a downloadable format, so that the user can upload it to his/her next site and download the same plugins with a single click. 
+WP Install Profiles (WPIP) allows users to define groups of plugins, called profiles. Once a profile has been entered, WPIP calls to the WordPress Plugin Directory, downloads the plugin files and unzips them to the installation's plugins folder. Additionally, WPIP saves the profile in a downloadable format, so you can upload it to your next site and download the same plugins with a single click. 
 
-NEW - Store your profiles online and import them easily into all of your WordPress installs. [http://plugins.ancillaryfactory.com](Learn more and create and account)
+Store your profiles online at http://plugins.ancillaryfactory.com and import them easily into all of your WordPress installs. [Learn more and create an account] (http://plugins.ancillaryfactory.com)
 
 See Install Profiles in action: [http://www.youtube.com/watch?v=W-mBhPA1XGA](http://www.youtube.com/watch?v=W-mBhPA1XGA)
 
@@ -36,6 +36,13 @@ See Install Profiles in action: [http://www.youtube.com/watch?v=W-mBhPA1XGA](htt
 3. Import online profiles with your WPIP username
 
 == Changelog ==
+
+= 2.5 =
+
+* Major security enhancements - Thanks, Julio!
+* When downloading a profile of the current site, you can now choose from a list of all plugins, both active and inactive. Great idea, Marikamitsos!
+* Bugfixes for Windows hosting environments
+
 = 2.0 =
 
 * Save profiles online
@@ -50,3 +57,18 @@ See Install Profiles in action: [http://www.youtube.com/watch?v=W-mBhPA1XGA](htt
 = 0.7 =
 
 * First release
+
+== Upgrade Notice ==
+
+= 2.5 =
+
+Upgrade STRONGLY recommended to fix several security vulnerabilities
+
+== Other Notes ==
+
+= Required PHP libraries =
+
+* SimpleXML
+* ZipArchive
+
+These libraries are installed by default on most shared hosting accounts, but they may need to be installed manually if your site is hosted on Media Temple.
