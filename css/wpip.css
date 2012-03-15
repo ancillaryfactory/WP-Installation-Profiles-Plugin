@@ -1,114 +1,114 @@
-#downloadSuccessList {background:#A6F29F;margin-bottom: 30px;}
-
-/*#wpipFormWrapper {margin-top: 30px;padding: 10px 50px 0px;width:745px;}*/
-
-#pluginNames, #profileName {border:1px solid #999;padding:5px}
-
- /* #uploadWrapper {border-left: 1px solid #D7D7D7;float: right;min-height: 600px;padding:20px 66px;} */
-/*#downloadWrapper {margin-top:15px;}*/
-
-#importFormWrapper {margin-bottom:40px;overflow:hidden}
-
-#simplemodal-data {color:#000;padding:40px;background:#d3d3d3;opacity:0.9;font-size:16px;width:500px;font-weight:bold;text-align:center;border-radius:10px}
-
-
-#pluginDownloadSuccess {list-style:disc;margin-left:30px}
-
-#profileToDownload {padding:10px;font-weight:bold;}
-
-#wpipHelp {box-shadow: 1px 1px 10px #D8D8D8;margin-top: 20px;padding: 5px 0 5px 20px;}
-
-#wpipApiImport {margin-bottom:20px;padding-bottom:1px}
-
-#pluginCheckboxForm {background:#dcdcdc;padding:40px;width:500px;height:450px;border-radius:10px;}
-#checkboxContainer {overflow-y:scroll;height:300px;margin-bottom:30px;}
-
-.modalHeadline {color:#666;font-size: 14px;padding-bottom:6px;}
-input.largeInput {padding:10px;font-size:14px;width:300px;}
-.pluginCheckbox {padding: 8px 4px;}
-
-
-
-/* add screen width less than 730px, make tabs to go below title */
-@media screen and (max-width: 730px){
-	.wrap h2 {float:none !important;}
-	ul.tabs li {top:0 !important;}
-}
-
-
-
-
-
-/* #Tabs (activate in tabs.js)
-================================================== */
-	ul.tabs {
-		display: block;
-		margin: 0 0 20px 0;
-		padding: 0;
-		border-bottom: solid 1px #ddd; }
-	ul.tabs li {
-		display: block;
-		width: auto;
-		height: 30px;
-		padding: 0;
-		float: left;
-		margin-bottom: 0;
-		position:relative;
-		top:11px;
-		 }
-	ul.tabs li a {
-		display: block;
-		text-decoration: none;
-		width: auto;
-		height: 29px;
-		padding: 0px 20px;
-		line-height: 30px;
-		border: solid 1px #ddd;
-		border-width: 1px 1px 0 0;
-		margin: 0;
-		background: #f5f5f5;
-		font-size: 13px; }
-	ul.tabs li a.active {
-		background: #fff;
-		height: 30px;
-		position: relative;
-		top: -4px;
-		padding-top: 4px;
-		border-left-width: 1px;
-		margin: 0 0 0 -1px;
-		color: #111;
-		-moz-border-radius-topleft: 2px;
-		-webkit-border-top-left-radius: 2px;
-		border-top-left-radius: 2px;
-		-moz-border-radius-topright: 2px;
-		-webkit-border-top-right-radius: 2px;
-		border-top-right-radius: 2px; }
-	ul.tabs li:first-child a.active {
-		margin-left: 0; }
-	ul.tabs li:first-child a {
-		border-width: 1px 1px 0 1px;
-		-moz-border-radius-topleft: 2px;
-		-webkit-border-top-left-radius: 2px;
-		border-top-left-radius: 2px; }
-	ul.tabs li:last-child a {
-		-moz-border-radius-topright: 2px;
-		-webkit-border-top-right-radius: 2px;
-		border-top-right-radius: 2px; }
-
-	ul.tabs-content { margin: 0; display: block; }
-	ul.tabs-content > li { display:none; }
-	ul.tabs-content > li.active { display: block; }
-
-	/* Clearfixing tabs for beautiful stacking */
-	ul.tabs:before,
-	ul.tabs:after {
-	  content: '\0020';
-	  display: block;
-	  overflow: hidden;
-	  visibility: hidden;
-	  width: 0;
-	  height: 0; }
-	ul.tabs:after {
-	  clear: both; }
-	ul.tabs {
-	  zoom: 1; }
+#downloadSuccessList {background:#A6F29F;margin-bottom: 30px;}
+
+/*#wpipFormWrapper {margin-top: 30px;padding: 10px 50px 0px;width:745px;}*/
+
+#pluginNames, #profileName {border:1px solid #999;padding:5px}
+
+ /* #uploadWrapper {border-left: 1px solid #D7D7D7;float: right;min-height: 600px;padding:20px 66px;} */
+/*#downloadWrapper {margin-top:15px;}*/
+
+#importFormWrapper {margin-bottom:40px;overflow:hidden}
+
+#simplemodal-data {color:#000;padding:40px;background:#d3d3d3;opacity:0.9;font-size:16px;width:500px;font-weight:bold;text-align:center;border-radius:10px}
+
+
+#pluginDownloadSuccess {list-style:disc;margin-left:30px}
+
+#profileToDownload {padding:10px;font-weight:bold;}
+
+#wpipHelp {box-shadow: 1px 1px 10px #D8D8D8;margin-top: 20px;padding: 5px 0 5px 20px;}
+
+#wpipApiImport {margin-bottom:20px;padding-bottom:1px}
+
+#pluginCheckboxForm {background:#dcdcdc;padding:40px;width:500px;height:450px;border-radius:10px;}
+#checkboxContainer {overflow-y:scroll;height:300px;margin-bottom:30px;}
+
+.modalHeadline {color:#666;font-size: 14px;padding-bottom:6px;}
+input.largeInput {padding:10px;font-size:14px;width:300px;}
+.pluginCheckbox {padding: 8px 4px;}
+
+
+
+/* add screen width less than 730px, make tabs to go below title */
+@media screen and (max-width: 730px){
+	.wrap h2 {float:none !important;}
+	ul.tabs li {top:0 !important;}
+}
+
+
+
+
+
+/* #Tabs (activate in tabs.js)
+================================================== */
+	ul.tabs {
+		display: block;
+		margin: 0 0 20px 0;
+		padding: 0;
+		border-bottom: solid 1px #ddd; }
+	ul.tabs li {
+		display: block;
+		width: auto;
+		height: 30px;
+		padding: 0;
+		float: left;
+		margin-bottom: 0;
+		position:relative;
+		top:11px;
+		 }
+	ul.tabs li a {
+		display: block;
+		text-decoration: none;
+		width: auto;
+		height: 29px;
+		padding: 0px 20px;
+		line-height: 30px;
+		border: solid 1px #ddd;
+		border-width: 1px 1px 0 0;
+		margin: 0;
+		background: #f5f5f5;
+		font-size: 13px; }
+	ul.tabs li a.active {
+		background: #fff;
+		height: 30px;
+		position: relative;
+		top: -4px;
+		padding-top: 4px;
+		border-left-width: 1px;
+		margin: 0 0 0 -1px;
+		color: #111;
+		-moz-border-radius-topleft: 2px;
+		-webkit-border-top-left-radius: 2px;
+		border-top-left-radius: 2px;
+		-moz-border-radius-topright: 2px;
+		-webkit-border-top-right-radius: 2px;
+		border-top-right-radius: 2px; }
+	ul.tabs li:first-child a.active {
+		margin-left: 0; }
+	ul.tabs li:first-child a {
+		border-width: 1px 1px 0 1px;
+		-moz-border-radius-topleft: 2px;
+		-webkit-border-top-left-radius: 2px;
+		border-top-left-radius: 2px; }
+	ul.tabs li:last-child a {
+		-moz-border-radius-topright: 2px;
+		-webkit-border-top-right-radius: 2px;
+		border-top-right-radius: 2px; }
+
+	ul.tabs-content { margin: 0; display: block; }
+	ul.tabs-content > li { display:none; }
+	ul.tabs-content > li.active { display: block; }
+
+	/* Clearfixing tabs for beautiful stacking */
+	ul.tabs:before,
+	ul.tabs:after {
+	  content: '\0020';
+	  display: block;
+	  overflow: hidden;
+	  visibility: hidden;
+	  width: 0;
+	  height: 0; }
+	ul.tabs:after {
+	  clear: both; }
+	ul.tabs {
+	  zoom: 1; }

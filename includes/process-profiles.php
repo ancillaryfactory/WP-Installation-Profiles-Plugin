@@ -41,7 +41,7 @@
 
 	
 
-	if ( ($written > 0) && !isset($_POST['downloadPlugins']) ) { ?>
+	if ( ($written > 0)  ) { ?>
 
 		<div class="updated below-h2">
 			<p><strong><?php print esc_attr($profileName); ?></strong> saved.&nbsp;  
@@ -194,28 +194,35 @@ function wpip_download_profile() {
 	function wpip_fetch_plugins() {
 
 		$lines = $_POST['pluginNames'];
-		$linesArray = explode("\n", $lines);
+		$linesArray = explode("\r\n", $lines);
 
 
 		if ( !empty($lines) && $_POST['downloadPlugins'] && wp_verify_nonce($_POST['wpip_submit'],'plugins_to_download')) { ?>
-			<div class="updated">
+			<div class="updated below-h2">
 			<p><strong>Downloaded plugins:</strong></p>
 			<ul id="pluginDownloadSuccess">
 			<?php 
 			foreach ($linesArray as $line) {
 				unset($downloadTest);
+				unset($pos);
 				$apiFilename = trim(str_replace(' ', '-', $line));
-				$apiFilename = urlencode($apiFilename);
+				//$apiFilename = urlencode($apiFilename);
 
-
+				// check to see if slug starts with http://...
+				// if it does, extract the plugin slug
 				if ( empty($apiFilename) || $apiFilename == 'install-profiles' ) {
 					continue;
 				}
 
+				if ( starts_with($apiFilename,'http://wordpress')){
+					$apiFilename = rtrim($apiFilename,'/');
+					$pos = strrpos($apiFilename, '/');
+					$apiFilename = substr($apiFilename, $pos+1);
+				}
+
+
 				$apiURL = 'http://api.wordpress.org/plugins/info/1.0/' . $apiFilename . '.xml';
-
 				$plugin = simplexml_load_file($apiURL);
-
 
 				// gets filename from Wordpress API
 
@@ -267,8 +274,6 @@ function wpip_download_profile() {
 						print "<li>Couldn't find <strong>'" . esc_attr($line) . "'</strong></li>";
 					}  
 
-
-
 			} // end foreach  ?>
 
 			</ul>		
@@ -303,8 +308,6 @@ function wpip_download_profile() {
 		$profileCount = count($apiProfileData->profile);
 
 		if ( wp_verify_nonce($_POST['wpip_api'],'import_from_api')  ) {
-
-		
 
 			$i = 0;
 
@@ -344,7 +347,7 @@ function wpip_download_profile() {
 
 		
 
-		<div class="updated">
+		<div class="updated below-h2">
 
 			<p>Imported <?php print $profileCount; ?>
 
@@ -533,3 +536,7 @@ function wpip_is_windows() {
 
 }
 
+
+function starts_with($source, $prefix) {
+   return strncmp($source, $prefix, strlen($prefix)) == 0;
+}
