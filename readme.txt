@@ -8,7 +8,7 @@ Tags: wp, plugins, installation, admin, administration
 Author URI: http://www.ancillaryfactory.com
 Author: Jon Schwab
 Requires at least: 3.1
-Tested up to: 3.3
+Tested up to: 3.4
 Stable tag: 3.0
 Version: 3.0
 

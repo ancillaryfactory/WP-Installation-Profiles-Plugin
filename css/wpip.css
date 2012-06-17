@@ -1,3 +1,12 @@
+.plugins_page_installation_profiles div.updated {
+	clear:both;
+}
+
+-moz-placeholder {
+	color:#d3d3d3;
+}
+
+
 #downloadSuccessList {background:#A6F29F;margin-bottom: 30px;}
 
 /*#wpipFormWrapper {margin-top: 30px;padding: 10px 50px 0px;width:745px;}*/
@@ -27,7 +36,7 @@
 input.largeInput {padding:10px;font-size:14px;width:300px;}
 .pluginCheckbox {padding: 8px 4px;}
 
-
+#apiUserName {padding:5px;background:#E4E4E4;}
 
 /* add screen width less than 730px, make tabs to go below title */
 @media screen and (max-width: 730px){
