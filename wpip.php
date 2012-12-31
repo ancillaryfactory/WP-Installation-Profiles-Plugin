@@ -6,7 +6,7 @@ Plugin Name: Installation Profiles
 Plugin URI: http://plugins.ancilaryfactory.com
 Description: Download collections of plugins. Go to Plugins -> Bulk Install Profiles
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GC8T5GGQ4AWSA
-Version: 3.2
+Version: 3.4
 Author: Jon Schwab
 Author URI: http://www.ancillaryfactory.com
 License: GPL2

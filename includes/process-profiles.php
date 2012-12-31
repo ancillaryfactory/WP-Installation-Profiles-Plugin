@@ -4,8 +4,6 @@
 
 	function wpip_save_profile() {
 
-
-
 	// checks for form submission
 
 	$lines = ($_POST['pluginNames']);
@@ -35,41 +33,35 @@
 		$profileName = str_replace(' ', '-', $profileName);
 
 		// write file if nonce verifies and filename is valid
-
-
-
 		if ( wp_verify_nonce($_POST['wpip_submit'],'plugins_to_download') && !validate_file($profileName)) {	
+			
+			// initialize Filesystem API
+			$url = wp_nonce_url('plugins.php?page=installation_profiles','wpip');
+			if ( ! WP_Filesystem($creds) ) {
+				request_filesystem_credentials($url, '', true, false, null);
+				return;
+			}
 
-			$newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,"w"); 
+			global $wp_filesystem; 
 
-			$written =  fwrite($newProfile, $lines);
-
-
-
-			fclose($newProfile);
-
-
+			$newProfile = $wp_filesystem->put_contents(
+				  WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,
+				  $lines,
+				  FS_CHMOD_FILE // predefined mode settings for WP files
+				);
+			
+			// $newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,"w"); 
+			// $written =  fwrite($newProfile, $lines);
+			// fclose($newProfile);
 
 		}
 
-
-
-	
-
-
-
-	if ( ($written > 0)  ) { ?>
-
-
+		if ( ($newProfile)  ) { ?>
 
 		<div class="updated below-h2">
-
 			<p><strong><?php print esc_attr($profileName); ?></strong> saved.&nbsp;  
-
 				<a href="plugins.php?page=installation_profiles&download=<?php print $profileName ?>">Download</a>
-
 			</p>
-
 		</div>
 
 		<?php } else { ?>
@@ -111,20 +103,9 @@
 							$('#pluginNames').val(text);
 
 						}
-
-
-
 					});
-
-					
-
 				}); // end .change
-
-
-
 			});
-
-
 
 		</script>
 
@@ -136,17 +117,11 @@
 
 function wpip_download_profile() {
 
-
-
 		// sanitize filename & path 
 
 		$file = trim(urldecode($_GET['download']));
 
 		$fileExtension = end(explode('.', $file));
-
-
-
-
 
 		if ( wpip_is_windows() ) {
 
@@ -155,12 +130,7 @@ function wpip_download_profile() {
 		} else {
 
 			$validExtension = 'profile';
-
-
-
 		}
-
-
 
 
 
@@ -196,23 +166,13 @@ function wpip_download_profile() {
 
 			}
 
-
-
 	} // end check for valid file
-
-
-
-
-
-
 
 }
 
 
 
 	
-
-
 
 	function wpip_import_profile() {
 
@@ -265,7 +225,18 @@ function wpip_download_profile() {
 		$lines = $_POST['pluginNames'];
 		$linesArray = explode("\r\n", $lines);
 
-		if ( !empty($lines) && $_POST['downloadPlugins'] && wp_verify_nonce($_POST['wpip_submit'],'plugins_to_download')) { ?>
+		if ( !empty($lines) && $_POST['downloadPlugins'] && wp_verify_nonce($_POST['wpip_submit'],'plugins_to_download')) { 
+
+			
+			// initialize Filesystem API
+			$url = wp_nonce_url('plugins.php?page=installation_profiles','wpip');
+			if ( ! WP_Filesystem($creds) ) {
+				request_filesystem_credentials($url, '', true, false, null);
+				return;
+			}
+
+			global $wp_filesystem; 
+		?>
 
 			<div class="updated below-h2">
 			<p><strong>Downloaded plugins:</strong></p>
@@ -309,21 +280,16 @@ function wpip_download_profile() {
 					if ( !empty($pluginURL) ) {
 						$path_parts = pathinfo($pluginURL);
 						$filename = $path_parts['filename'] . '.' . $path_parts['extension'];
-						$path = plugin_dir_path(__FILE__) . $filename;
+						$path = WP_PLUGIN_DIR . '/install-profiles/profiles/' . $filename;
 
 						$response = wp_remote_get($pluginURL);
-
-						// Old method below - replaced by wp_remote_get()
-						
-						// $ch = curl_init($pluginURL);
-						// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-						// $data = curl_exec($ch);
-						// curl_close($ch);
-						
 						
 						// place downloaded plugin .ZIP in the WPIP folder before unzipping
-						$downloadTest = file_put_contents($path, $response['body']);
-						
+						$downloadTest = $wp_filesystem->put_contents(
+						  $path,
+						  $response['body'],
+						  FS_CHMOD_FILE // predefined mode settings for WP files
+						);
 
 						// extracts and deletes zip file
 						$zip = new ZipArchive;
@@ -337,8 +303,8 @@ function wpip_download_profile() {
 
 					}
 
-					if ( $downloadTest > 0 ) {
-						$delete = unlink($filename);
+					if ( $downloadTest ) {
+						$delete = unlink($path);
 						print '<li><a href="' . esc_url($apiHomepage) . '" target="_blank">'. esc_attr($apiName) . '</a> ' . esc_attr($apiVersion) . '</li>';
 					} else {
 						print "<li>Couldn't find <strong>'" . esc_attr($line) . "'</strong></li>";
@@ -373,6 +339,16 @@ function wpip_download_profile() {
 
 		if ( wp_verify_nonce($_POST['wpip_api'],'import_from_api')  ) {
 			$i = 0;
+			
+			// initialize Filesystem API
+			$url = wp_nonce_url('plugins.php?page=installation_profiles','wpip');
+			if ( ! WP_Filesystem($creds) ) {
+				request_filesystem_credentials($url, '', true, false, null);
+				return;
+			}
+
+			global $wp_filesystem;
+
 			while ( $i < $profileCount ) { 
 
 				unset($importedProfilePlugins);
@@ -395,25 +371,19 @@ function wpip_download_profile() {
 
 				} // end foreach
 
-				file_put_contents(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $importedFileName,$importedProfilePlugins);	
+				
+				$wp_filesystem->put_contents(
+				  WP_PLUGIN_DIR . '/install-profiles/profiles/' . $importedFileName,
+				  $importedProfilePlugins,
+				  FS_CHMOD_FILE // predefined mode settings for WP files
+				);
+
+				// file_put_contents(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $importedFileName,$importedProfilePlugins);	
 
 				$i++;
 			}  // end while 
 		} // end nonce check	
-
-
-
-	
-
-
-
 	?>
-
-
-
-		
-
-
 
 		<div class="updated below-h2">
 			<p>Imported <?php print $profileCount; ?>
