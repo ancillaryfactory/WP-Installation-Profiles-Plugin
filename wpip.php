@@ -271,8 +271,8 @@ function wpip_installation_profile_admin() {
 
 <form method="post" action="admin.php?page=installation_profiles" id="profileForm">
 
-    <h3 style="font-size:16px; padding: 3px 0 5px;"><?php _e('Choose a profile:','WPIP'); ?></h3>
-    <select id="profileFilename" name="profileFilename">
+    <h3 style="font-size:16px; padding: 14px 0 14px;"><?php _e('Choose a profile:','WPIP'); ?>
+    <select id="profileFilename" name="profileFilename" style="font-size:12px;font-weight:normal">
 
       <?php 
       foreach ( $profilesList as $profileFile ) {
@@ -286,10 +286,7 @@ function wpip_installation_profile_admin() {
 
     ?>
     </select>
-    <br/><br/>
-    </p>
-
-    
+    </h3>
 
     <p><strong><?php _e('Install these plugins','WPIP');?></strong> <em><?php _e('(one per line)','WPIP');?></em>:<span>
       <a style="font-size:10px;position:relative;top:-2px;margin-left:45px" href="#" id="helpTrigger"><?php _e('How to add plugins','WPIP'); ?></a></span><br/>

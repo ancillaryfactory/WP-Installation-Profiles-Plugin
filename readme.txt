@@ -40,7 +40,7 @@ See Install Profiles in action: [http://www.youtube.com/watch?v=W-mBhPA1XGA](htt
 = 3.4 =
 
 * UPDATE STRONGLY RECOMMENDED: Now supports Filesystem API for compatibility with multiple hosting environments
-
+* Minor UI udpates
 
 = 3.2 =
 
