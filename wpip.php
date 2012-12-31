@@ -50,9 +50,9 @@ function wpip_activate() {
     wp_die(__('Error: ZipArchive is not installed on this server.','WPIP'));
   }
 
-  if ( !ini_get('allow_url_fopen') ) {
-    wp_die(__('Error: allow_url_fopen needs to set "on" for WP Install Profiles to function correctly.','WPIP'));
-  }
+  // if ( !ini_get('allow_url_fopen') ) {
+  //   wp_die(__('Error: allow_url_fopen needs to set "on" for WP Install Profiles to function correctly.','WPIP'));
+  // }
 
   // check for windows and rename default.profile to default.txt
   if ( wpip_is_windows() ) {
