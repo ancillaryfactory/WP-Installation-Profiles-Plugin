@@ -499,50 +499,47 @@ function wpip_build_custom_profile() {
 		}
 
 
-		$newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,"w"); 
-		$written =  fwrite($newProfile, $fileContents);
-		fclose($newProfile);
-		$file = WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName;
+		$url = wp_nonce_url('plugins.php?page=installation_profiles','wpip');
+		if ( ! WP_Filesystem($creds) ) {
+			request_filesystem_credentials($url, '', true, false, null);
+			return;
+		}
 
+		global $wp_filesystem; 
+
+		$wp_filesystem->put_contents(
+			  WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,
+			  $fileContents,
+			  FS_CHMOD_FILE // predefined mode settings for WP files
+			);
+
+		$file = WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName;
 		$fileContents = '';
 
 		$currentSlugs = $_POST['currentSlugs'];
 
 		// assemble the file contents from the $_POST checkbox array
 		foreach ($currentSlugs as $slug) {	
-
 			$fileContents .= $slug . PHP_EOL;
-
 		}
 
 
-		$newProfile = fopen(WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,"w"); 
-
-		$written =  fwrite($newProfile, $fileContents);
-
-		fclose($newProfile);
-
+		$wp_filesystem->put_contents(
+			  WP_PLUGIN_DIR . '/install-profiles/profiles/' . $profileName,
+			  $fileContents,
+			  FS_CHMOD_FILE // predefined mode settings for WP files
+			);
 
 		// send the file download to the browser
 
 		if (file_exists($file)) {
-
-
-
 				header('Content-Description: File Transfer');
-
 				header('Content-Type: application/octet-stream');
-
 				header('Content-Disposition: attachment; filename='.basename($file));
-
 				header('Content-Transfer-Encoding: binary');
-
 				header('Expires: 0');
-
 				header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-
 				header('Pragma: public');
-
 				header('Content-Length: ' . filesize($file));
 
 				ob_clean();
@@ -552,22 +549,17 @@ function wpip_build_custom_profile() {
 				readfile($file);
 
 				exit;
-
 			}
-
-
 
 	} // end check for validate_file()
 
-
-
 }
+
+
 
 // Checks for Windows server to change .profile to .txt extension
 // IIS will not serve .profile files without extra configuration
 function wpip_is_windows() {
-
-
 
 	$pos = strpos($_SERVER['SERVER_SOFTWARE'],'Microsoft');	
 
