@@ -9,8 +9,8 @@ Author URI: http://www.ancillaryfactory.com
 Author: Jon Schwab
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 3.2
-Version: 3.2
+Stable tag: 3.4
+Version: 3.4
 
 Download custom collections of plugins automatically from the WordPress plugin directory.
 
