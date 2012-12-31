@@ -44,7 +44,7 @@ input.largeInput {padding:10px;font-size:14px;width:300px;}
 	ul.tabs li {top:0 !important;}
 }
 
-
+#screen-meta {z-index:1000;}
 
 
 

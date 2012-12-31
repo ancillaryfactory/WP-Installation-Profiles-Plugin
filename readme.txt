@@ -4,13 +4,13 @@ Contributors: rockgod100
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GC8T5GGQ4AWSA
 Plugin Name: Installation Profiles
 Plugin URI: http://plugins.ancillaryfactory.com
-Tags: wp, plugins, installation, admin, administration
+Tags: wp, plugins, installation, admin, administration, install, profiles
 Author URI: http://www.ancillaryfactory.com
 Author: Jon Schwab
 Requires at least: 3.1
-Tested up to: 3.4
-Stable tag: 3.0
-Version: 3.0
+Tested up to: 3.6
+Stable tag: 3.2
+Version: 3.2
 
 Download custom collections of plugins automatically from the WordPress plugin directory.
 
@@ -37,6 +37,12 @@ See Install Profiles in action: [http://www.youtube.com/watch?v=W-mBhPA1XGA](htt
 3. Import online profiles with your WPIP username
 
 == Changelog ==
+= 3.2 =
+
+* UI fixes
+* Changes to plugin download method
+
+
 = 3.0 =
 
 * New tabbed UI
@@ -66,15 +72,19 @@ See Install Profiles in action: [http://www.youtube.com/watch?v=W-mBhPA1XGA](htt
 
 == Upgrade Notice ==
 
-= 2.5 =
+= 3.1 =
 
 Upgrade STRONGLY recommended to fix several security vulnerabilities
 
-== Other Notes ==
+== Troubleshooting ==
 
 = Required PHP libraries =
 
 * SimpleXML
 * ZipArchive
 
-These libraries are installed by default on most shared hosting accounts, but they may need to be installed manually if your site is hosted on Media Temple.
+These libraries are installed by default on most shared hosting accounts, but they may need to be installed manually if your site is hosted by certain providers, including Media Temple.
+
+= File Permissions =
+
+If you are unable to save or import profiles, you may need to set `wp-content/plugins/install-profiles/profiles` to 777. 
